@@ -58,7 +58,9 @@ export default function HomeScreen(props) {
 					return <PageLoading isFetched={false} news={false} />;
 				} else if (data) {
 					setIsFetched(true);
-					return <Page isFetched={true} news={data} />;
+					return (
+						<Page isFetched={true} news={data} navigation={props.navigation} />
+					);
 				}
 			}}
 		</Query>

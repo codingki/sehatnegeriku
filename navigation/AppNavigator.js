@@ -8,19 +8,12 @@ import TabBarIcon from '../components/TabBarIcon';
 import Home from '../screens/Home';
 import Detail from '../screens/Detail';
 import Media from '../screens/Media';
+import Search from '../screens/Search';
 import { HomeProvider } from '../provider/HomeProvider';
 
 const Tab = createBottomTabNavigator();
 
 const Stack = createStackNavigator();
-
-const HomeScreen = () => {
-	return (
-		<HomeProvider>
-			<Home />
-		</HomeProvider>
-	);
-};
 
 const Tabs = () => {
 	return (
@@ -31,7 +24,7 @@ const Tabs = () => {
 		>
 			<Tab.Screen
 				name="Home"
-				component={HomeScreen}
+				component={Home}
 				options={{
 					tabBarLabel: ({ focused }) => (
 						<Text
@@ -67,7 +60,7 @@ const Tabs = () => {
 						</Text>
 					),
 					tabBarIcon: ({ focused }) => (
-						<TabBarIcon focused={focused} name={'camera'} />
+						<TabBarIcon focused={focused} name={'film'} />
 					),
 				}}
 			/>
@@ -105,6 +98,7 @@ const Stacks = () => {
 			}}
 		>
 			<Stack.Screen name="Main" component={Tabs} />
+			<Stack.Screen name="Search" component={Search} />
 			<Stack.Screen name="Detail" component={Detail} />
 		</Stack.Navigator>
 	);

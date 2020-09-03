@@ -8,14 +8,13 @@ import Rubrik from './rubrik/Rubrik';
 
 const { width } = Dimensions.get('window');
 
-export default function HomeScreen() {
+export default function HomeScreen({ navigation }) {
 	const [selectedIndex, setSelectedIndex] = useState(0);
-
 	return (
 		<View style={styles.container}>
 			<ScrollView stickyHeaderIndices={[1]}>
 				{/* Top Nav */}
-				<TopNav />
+				<TopNav navigation={navigation} />
 				<TabView selectedIndex={selectedIndex} onSelect={setSelectedIndex}>
 					<Tab title="Terbaru" />
 					<Tab title="Rilis" />
@@ -23,11 +22,15 @@ export default function HomeScreen() {
 					<Tab title="Infogafis" />
 					<Tab title="Daerah" />
 				</TabView>
-				{selectedIndex == 0 && <Latest />}
-				{selectedIndex == 1 && <Rubrik slug="rilis-media" />}
-				{selectedIndex == 2 && <Rubrik slug="blog" />}
-				{selectedIndex == 3 && <Rubrik slug="infografis" />}
-				{selectedIndex == 4 && <Rubrik slug="daerah" />}
+				{selectedIndex == 0 && <Latest navigation={navigation} />}
+				{selectedIndex == 1 && (
+					<Rubrik slug="rilis-media" navigation={navigation} />
+				)}
+				{selectedIndex == 2 && <Rubrik slug="blog" navigation={navigation} />}
+				{selectedIndex == 3 && (
+					<Rubrik slug="infografis" navigation={navigation} />
+				)}
+				{selectedIndex == 4 && <Rubrik slug="daerah" navigation={navigation} />}
 			</ScrollView>
 		</View>
 	);

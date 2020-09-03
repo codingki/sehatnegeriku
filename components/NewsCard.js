@@ -22,8 +22,16 @@ export default function NewsCard(props) {
 			}
 		}
 	}
+
 	return (
-		<TouchableWithoutFeedback>
+		<TouchableWithoutFeedback
+			onPress={() => {
+				props.navigation.navigate('Detail', {
+					id: data.id,
+					category: data.categories[0].title,
+				});
+			}}
+		>
 			<View
 				style={{
 					marginVertical: 7.5,
@@ -61,6 +69,7 @@ export default function NewsCard(props) {
 						visible={isFetched}
 					>
 						<Text
+							numberOfLines={3}
 							style={{
 								fontWeight: 'bold',
 								fontSize: 15,

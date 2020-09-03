@@ -12,10 +12,38 @@ import {
 import HTML from 'react-native-render-html';
 import { Ionicons } from '@expo/vector-icons';
 import { Icon } from '@ui-kitten/components';
-
+import { ApolloProvider, Query, useQuery } from 'react-apollo';
+import gql from 'graphql-tag';
+import LoadingNews from '../components/DetailNewsLoading';
+import News from '../components/DetailNews';
 const { width, height } = Dimensions.get('window');
 const category = 0.034 * width;
-export default function Detail() {
+
+export default function Detail({ navigation, route }) {
+	const { id, category } = route.params;
+
+	const detail = `
+        query  {
+			detail(id:${id}){
+				id,
+				title,
+				date,
+				categories{
+				  title
+				},
+				author {
+				  name
+				},
+				thumbnail_images{
+				  full{
+					url
+				  }
+				},
+				content
+			  }
+        }
+      `;
+
 	const htmlContent = `
     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
     Pellentesque arcu eget risus est in proin nec facilisis purus.
@@ -44,9 +72,14 @@ export default function Detail() {
 						alignItems: 'center',
 					}}
 				>
-					<View style={{ flex: 1, alignItems: 'flex-start' }}>
+					<TouchableOpacity
+						onPress={() => {
+							navigation.goBack();
+						}}
+						style={{ flex: 1, alignItems: 'flex-start' }}
+					>
 						<Icon name="arrow-ios-back" width={24} height={24} fill="#16B3AC" />
-					</View>
+					</TouchableOpacity>
 					<View style={{ alignItems: 'center', flex: 2 }}>
 						<Text
 							style={{
@@ -55,7 +88,7 @@ export default function Detail() {
 								fontSize: 0.0437 * width > 18 ? 18 : 0.0437 * width,
 							}}
 						>
-							Rilis Sehat
+							{category}
 						</Text>
 					</View>
 					<View
@@ -74,60 +107,20 @@ export default function Detail() {
 					</View>
 				</View>
 			</View>
-			<ScrollView stickyHeaderIndices={[1]}>
-				<Image
-					style={{ height: 230 }}
-					resizeMode="cover"
-					source={{
-						uri:
-							'https://www.brownweinraub.com/wp-content/uploads/2017/09/placeholder.jpg',
-					}}
-				/>
-				<View
-					style={{
-						padding: 10,
-						paddingHorizontal: 15,
-						backgroundColor: '#f5f5f5',
-						borderBottomWidth: 1,
-						borderColor: '#e7e7e7',
-					}}
-				>
-					<Text style={{ fontWeight: 'bold', fontSize: 20 }}>
-						Pemerintah Belum Rencanakan Relaksasi PSBB
-					</Text>
-					<Text style={{ color: '#9A9696', marginTop: 2, fontSize: 12 }}>
-						John Doe | Rabu, 20 Mei 2020 18:20 WIB
-					</Text>
-				</View>
-				<View></View>
-				<View
-					style={{
-						backgroundColor: 'white',
 
-						paddingHorizontal: 15,
-						paddingVertical: 10,
-					}}
-				>
-					<HTML
-						html={htmlContent}
-						imagesMaxWidth={width - 30}
-						textSelectable
-						tagsStyles={{ p: { fontSize: 16 } }}
-					/>
-					<HTML
-						html={htmlContent}
-						imagesMaxWidth={width - 30}
-						textSelectable
-						tagsStyles={{ p: { fontSize: 16 } }}
-					/>
-					<HTML
-						html={htmlContent}
-						imagesMaxWidth={width - 30}
-						textSelectable
-						tagsStyles={{ p: { fontSize: 16 } }}
-					/>
-				</View>
-			</ScrollView>
+			<Query
+				query={gql`
+					${detail}
+				`}
+			>
+				{({ loading, error, data }) => {
+					if (loading || error) {
+						return <LoadingNews />;
+					} else if (data) {
+						return <News data={data.detail} />;
+					}
+				}}
+			</Query>
 		</View>
 	);
 }

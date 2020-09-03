@@ -19,28 +19,21 @@ const { width, height } = Dimensions.get('window');
 const category = 0.034 * width;
 export default function Page(props) {
 	const { news, isFetched } = props;
-	const [berita, setBerita] = useState(news.category);
+	const [berita, setBerita] = useState(news.search);
 
 	return (
 		<View style={{ flex: 1 }}>
-			<Slider
-				isFetched={isFetched}
-				data={berita}
-				navigation={props.navigation}
-			/>
-
 			<View style={styles.newsCardContainer}>
 				{berita !== undefined &&
 					berita.map((item, index) => {
-						if (index > 2)
-							return (
-								<NewsCard
-									key={item.id}
-									isFetched={isFetched}
-									data={item}
-									navigation={props.navigation}
-								/>
-							);
+						return (
+							<NewsCard
+								key={item.id}
+								isFetched={isFetched}
+								data={item}
+								navigation={props.navigation}
+							/>
+						);
 					})}
 			</View>
 		</View>

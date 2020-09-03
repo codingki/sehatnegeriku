@@ -47,7 +47,13 @@ export default function Slider(props) {
 					{data !== undefined &&
 						data.map((item, index) => {
 							if (index <= 2) {
-								return <SliderCard data={item} key={item.id} />;
+								return (
+									<SliderCard
+										data={item}
+										key={item.id}
+										navigation={props.navigation}
+									/>
+								);
 							}
 						})}
 				</Swiper>

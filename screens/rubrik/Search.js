@@ -15,42 +15,41 @@ import { ApolloProvider, Query, useQuery } from 'react-apollo';
 import ApolloClient from 'apollo-boost';
 import gql from 'graphql-tag';
 
-import PageLoading from '../../components/PageLoading';
-import Page from '../../components/PageRubrik';
+import PageLoading from '../../components/LoadingSearch';
+import Page from '../../components/PageSearch';
 const { width, height } = Dimensions.get('window');
 const category = 0.034 * width;
 
 export default function HomeScreen(props) {
 	const [isFetched, setIsFetched] = useState(false);
 
-	function recentQuery(page) {
+	function recentQuery(search, page) {
 		return `
-        query {
-                  category(count:10, slug:"${props.slug}", page:${page}) {
-                    id,
-            		title,
-            		date,
-            		categories{
-            			title
-            		},
-            		author{
-            			name
-            		},
-            		thumbnail_images{
-            			full{
-            			  url
-            			}
-            		  }
-                  }
-                }
-              
+        query  {
+          search(search:"${search}",count:10,page:${page}) {
+            id,
+			title,
+			date,
+			categories{
+				title
+			},
+			author{
+				name
+			},
+			thumbnail_images{
+				full{
+				  url
+				}
+			  }
+          }
+        }
       `;
 	}
 
 	return (
 		<Query
 			query={gql`
-				${recentQuery(1)}
+				${recentQuery(props.search, 1)}
 			`}
 		>
 			{({ loading, error, data }) => {
@@ -60,11 +59,7 @@ export default function HomeScreen(props) {
 				} else if (data) {
 					setIsFetched(true);
 					return (
-						<Page
-							isFetched={isFetched}
-							news={data}
-							navigation={props.navigation}
-						/>
+						<Page isFetched={true} news={data} navigation={props.navigation} />
 					);
 				}
 			}}

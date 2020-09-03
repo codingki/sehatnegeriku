@@ -23,14 +23,23 @@ export default function Page(props) {
 
 	return (
 		<View style={{ flex: 1 }}>
-			<Slider isFetched={isFetched} data={berita} />
+			<Slider
+				isFetched={isFetched}
+				data={berita}
+				navigation={props.navigation}
+			/>
 
 			<View style={styles.newsCardContainer}>
 				{berita !== undefined &&
 					berita.map((item, index) => {
 						if (index > 2)
 							return (
-								<NewsCard key={item.id} isFetched={isFetched} data={item} />
+								<NewsCard
+									key={item.id}
+									isFetched={isFetched}
+									data={item}
+									navigation={props.navigation}
+								/>
 							);
 					})}
 			</View>

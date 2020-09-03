@@ -14,6 +14,7 @@ import moment from 'moment';
 const { width, height } = Dimensions.get('window');
 export default function SliderCard(props) {
 	const { data } = props;
+
 	function check() {
 		if (data.thumbnail_images) {
 			if (data.thumbnail_images.full) {
@@ -24,7 +25,14 @@ export default function SliderCard(props) {
 		}
 	}
 	return (
-		<TouchableWithoutFeedback>
+		<TouchableWithoutFeedback
+			onPress={() => {
+				props.navigation.navigate('Detail', {
+					id: data.id,
+					category: data.categories[0].title,
+				});
+			}}
+		>
 			<View
 				style={{
 					flex: 1,

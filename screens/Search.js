@@ -2,26 +2,21 @@ import React, { useState } from 'react';
 import { View, StyleSheet, ScrollView, Dimensions } from 'react-native';
 import { Tab, TabView } from '@ui-kitten/components';
 
-import TopNav from '../components/TopNav';
-import Latest from './rubrik/Latest';
+import TopNav from '../components/SearchTopNav';
+import Search from './rubrik/Search';
 import Rubrik from './rubrik/Rubrik';
 
 const { width } = Dimensions.get('window');
 
-export default function MediaScreen({ navigation }) {
-	const [selectedIndex, setSelectedIndex] = useState(0);
-
+export default function SearchScreen({ navigation, route }) {
+	const { search } = route.params;
 	return (
 		<View style={styles.container}>
-			<ScrollView stickyHeaderIndices={[1]}>
+			<TopNav navigation={navigation} search={search} />
+			<ScrollView>
 				{/* Top Nav */}
-				<TopNav navigation={navigation} />
-				<TabView selectedIndex={selectedIndex} onSelect={setSelectedIndex}>
-					<Tab title="Video" />
-					<Tab title="Foto" />
-				</TabView>
-				{selectedIndex == 0 && <Rubrik slug="video" navigation={navigation} />}
-				{selectedIndex == 1 && <Rubrik slug="foto" navigation={navigation} />}
+
+				<Search navigation={navigation} search={search} />
 			</ScrollView>
 		</View>
 	);
