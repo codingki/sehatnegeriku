@@ -9,7 +9,7 @@ import Home from '../screens/Home';
 import Detail from '../screens/Detail';
 import Media from '../screens/Media';
 import Search from '../screens/Search';
-import { HomeProvider } from '../provider/HomeProvider';
+import Saved from '../screens/Saved';
 
 const Tab = createBottomTabNavigator();
 
@@ -65,8 +65,8 @@ const Tabs = () => {
 				}}
 			/>
 			<Tab.Screen
-				name="Settings"
-				component={Detail}
+				name="Saved"
+				component={Saved}
 				options={{
 					tabBarLabel: ({ focused }) => (
 						<Text

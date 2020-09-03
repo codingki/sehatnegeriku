@@ -8,6 +8,7 @@ import {
 	Dimensions,
 	TouchableOpacity,
 	Easing,
+	AsyncStorage,
 } from 'react-native';
 import HTML from 'react-native-render-html';
 import { Ionicons } from '@expo/vector-icons';

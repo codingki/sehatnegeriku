@@ -9,6 +9,7 @@ import {
 	TouchableOpacity,
 	Easing,
 } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 import HTML from 'react-native-render-html';
 import { Ionicons } from '@expo/vector-icons';
 import { Icon } from '@ui-kitten/components';
@@ -21,7 +22,12 @@ const category = 0.034 * width;
 
 export default function Detail({ navigation, route }) {
 	const { id, category } = route.params;
+	const [content, setContent] = useState(null);
+	const [saved, setSaved] = useState(false);
 
+	useEffect(() => {
+		checkSaved();
+	}, []);
 	const detail = `
         query  {
 			detail(id:${id}){
@@ -42,17 +48,47 @@ export default function Detail({ navigation, route }) {
 				content
 			  }
         }
-      `;
+	  `;
 
-	const htmlContent = `
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    Pellentesque arcu eget risus est in proin nec facilisis purus.
-    Mauris tristique blandit a morbi habitant sed consectetur blandit.
-    Sed scelerisque cras quam a imperdiet in erat in. Aenean dolor
-    libero mattis pharetra volutpat tincidunt aliquam est, malesuada.
-    Libero senectus lectus facilisis molestie. Porttitor felis sit
-    tempus nunc mauris orci, amet auctor in.</p>
-`;
+	async function checkSaved() {
+		try {
+			const value = await AsyncStorage.getItem('saved:' + id);
+			if (value !== null) {
+				// We have data!!
+				setSaved(true);
+			} else {
+				setSaved(false);
+			}
+		} catch (error) {
+			setSaved(false);
+		}
+	}
+
+	async function save() {
+		if (content) {
+			try {
+				await AsyncStorage.setItem(
+					'saved:' + id,
+					JSON.stringify(content.detail)
+				);
+				setSaved(true);
+			} catch (error) {
+				console.log(error);
+			}
+		}
+	}
+
+	async function remove() {
+		if (content) {
+			try {
+				await AsyncStorage.removeItem('saved');
+				setSaved(false);
+			} catch (error) {
+				console.log(error);
+			}
+		}
+	}
+
 	return (
 		<View style={styles.container}>
 			<View
@@ -91,20 +127,27 @@ export default function Detail({ navigation, route }) {
 							{category}
 						</Text>
 					</View>
-					<View
+					<TouchableOpacity
 						style={{
 							alignItems: 'flex-end',
 							flex: 1,
 							justifyContent: 'center',
 						}}
+						onPress={() => {
+							if (saved) {
+								remove();
+							} else {
+								save();
+							}
+						}}
 					>
 						<Icon
-							name="bookmark-outline"
+							name={saved ? 'bookmark' : 'bookmark-outline'}
 							width={24}
 							height={24}
 							fill="#16B3AC"
 						/>
-					</View>
+					</TouchableOpacity>
 				</View>
 			</View>
 
@@ -117,6 +160,7 @@ export default function Detail({ navigation, route }) {
 					if (loading || error) {
 						return <LoadingNews />;
 					} else if (data) {
+						setContent(data);
 						return <News data={data.detail} />;
 					}
 				}}
