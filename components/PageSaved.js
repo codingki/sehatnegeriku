@@ -19,7 +19,6 @@ const { width, height } = Dimensions.get('window');
 const category = 0.034 * width;
 export default function Page(props) {
 	const [berita, setBerita] = useState(props.news);
-
 	return (
 		<View style={{ flex: 1 }}>
 			{props.news !== null ? (
@@ -29,9 +28,10 @@ export default function Page(props) {
 						let key = store[i][0];
 						let item = store[i][1];
 						const pars = JSON.parse(item);
+						console.log(pars);
 						return (
 							<NewsCard
-								key={item.id}
+								key={pars.id}
 								isFetched={true}
 								data={pars}
 								navigation={props.navigation}

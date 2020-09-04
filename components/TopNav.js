@@ -7,9 +7,9 @@ import {
 	Image,
 	Dimensions,
 	TouchableOpacity,
+	TextInput,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { TextInput } from 'react-native-gesture-handler';
 
 const { width, height } = Dimensions.get('window');
 const category = 0.034 * width;

@@ -73,7 +73,7 @@ export default function Detail({ navigation, route }) {
 				);
 				setSaved(true);
 			} catch (error) {
-				console.log(error);
+				alert(error);
 			}
 		}
 	}
@@ -81,10 +81,10 @@ export default function Detail({ navigation, route }) {
 	async function remove() {
 		if (content) {
 			try {
-				await AsyncStorage.removeItem('saved');
+				await AsyncStorage.removeItem('saved:' + id);
 				setSaved(false);
 			} catch (error) {
-				console.log(error);
+				alert(error);
 			}
 		}
 	}

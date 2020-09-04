@@ -7,9 +7,9 @@ import {
 	Image,
 	Dimensions,
 	TouchableOpacity,
+	TextInput,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { TextInput } from 'react-native-gesture-handler';
 
 import { Icon } from '@ui-kitten/components';
 const { width, height } = Dimensions.get('window');

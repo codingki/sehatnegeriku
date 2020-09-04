@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { View, StyleSheet, ScrollView, Dimensions } from 'react-native';
+import {
+	View,
+	StyleSheet,
+	ScrollView,
+	Dimensions,
+	RefreshControl,
+} from 'react-native';
 import { Tab, TabView } from '@ui-kitten/components';
 import AsyncStorage from '@react-native-community/async-storage';
 import TopNav from '../components/SavedTopNav';
@@ -10,6 +16,7 @@ const { width } = Dimensions.get('window');
 
 export default function SavedScreen({ navigation }) {
 	const [data, setData] = useState(null);
+	const [refreshing, setRefreshing] = useState(false);
 	useEffect(() => {
 		getData();
 	}, []);
@@ -18,8 +25,12 @@ export default function SavedScreen({ navigation }) {
 		let keys = [];
 
 		keys = await AsyncStorage.getAllKeys();
+		if (keys.length == 0) {
+			setData(null);
+		} else {
+			getMultiple(keys);
+		}
 
-		getMultiple(keys);
 		// example console.log result:
 		// ['@MyApp_user', '@MyApp_key']
 	}
@@ -27,11 +38,25 @@ export default function SavedScreen({ navigation }) {
 		const values = await AsyncStorage.multiGet(keys);
 
 		setData(values);
+		setRefreshing(false);
 	}
+	const onRefresh = React.useCallback(() => {
+		setRefreshing(true);
+		getData();
+	}, []);
 
 	return (
 		<View style={styles.container}>
-			<ScrollView stickyHeaderIndices={[0]}>
+			<ScrollView
+				stickyHeaderIndices={[0]}
+				refreshControl={
+					<RefreshControl
+						colors={['#16B3AC']}
+						refreshing={refreshing}
+						onRefresh={onRefresh}
+					/>
+				}
+			>
 				{/* Top Nav */}
 				<TopNav navigation={navigation} />
 

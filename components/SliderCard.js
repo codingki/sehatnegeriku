@@ -51,7 +51,7 @@ export default function SliderCard(props) {
 				/>
 
 				<LinearGradient
-					colors={['transparent', 'rgba(0,0,0,0.4)']}
+					colors={['transparent', 'rgba(0,0,0,0.7)']}
 					style={{
 						position: 'absolute',
 						left: 0,
