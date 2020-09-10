@@ -21,6 +21,8 @@ This is unofficial Redesign & Rebuild project by me.
 - [ ]  Implementing shared element for navigation transitions
 - [ ]  Upload to playstore 🥳
 
+Graphql server repo : [https://github.com/codingki/sehatnegeriku-graphql](https://github.com/codingki/sehatnegeriku-graphql)
+
 Full read case study : [https://twitter.com/kikiding/status/1302211106958573568](https://twitter.com/kikiding/status/1302211106958573568)
 
 Try it on expo : [https://expo.io/@kidingki/sehatnegeriku](https://expo.io/@kidingki/sehatnegeriku)
