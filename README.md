@@ -1,6 +1,6 @@
 # Redesign & Rebuild "Sehat Negeriku" Kemenkes news portal app
 
-![Redesign%20&%20Rebuild%20Sehat%20Negeriku%20Kemenkes%20news%20po%209da3f6733fb9487eba3a0e53eceac5c0/rsz_kemenkes_shots_fixed-02.jpg](Redesign%20&%20Rebuild%20Sehat%20Negeriku%20Kemenkes%20news%20po%209da3f6733fb9487eba3a0e53eceac5c0/rsz_kemenkes_shots_fixed-02.jpg)
+![thumbnail.jpg](thumbnail.jpg)
 
 This is unofficial Redesign & Rebuild project by me.
 
