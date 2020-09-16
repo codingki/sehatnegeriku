@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
-import Slider from '../LoadingSlider';
-import NewsCard from '../LoadingNewsCard';
+import Slider from './LoadingSlider';
+import NewsCard from './LoadingNewsCard';
 const { width } = Dimensions.get('window');
 export default function PageLoading(props) {
 	return (

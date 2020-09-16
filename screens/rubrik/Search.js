@@ -3,12 +3,12 @@ import { StyleSheet, Dimensions } from 'react-native';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 
-import PageLoading from '../../components/LoadingSearch';
-import Page from '../../components/PageSearch';
+import PageLoading from '../../components/loading/Page';
+import Page from '../../components/page/PageSearch';
 const { width } = Dimensions.get('window');
 
 export default function HomeScreen(props) {
-	const [, setIsFetched] = useState(false);
+	const [isFetched, setIsFetched] = useState(false);
 
 	function recentQuery(search, page) {
 		return `
@@ -23,6 +23,7 @@ export default function HomeScreen(props) {
 			author{
 				name
 			},
+			content,
 			thumbnail_images{
 				full{
 				  url

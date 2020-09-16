@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import TopNav from '../components/topnav/SavedTopNav';
-import Saved from '../components/PageSaved';
+import Saved from '../components/page/PageSaved';
 
 export default function SavedScreen({ navigation }) {
 	const [data, setData] = useState(null);
@@ -26,9 +26,6 @@ export default function SavedScreen({ navigation }) {
 		} else {
 			getMultiple(keys);
 		}
-
-		// example console.log result:
-		// ['@MyApp_user', '@MyApp_key']
 	}
 	async function getMultiple(keys) {
 		const values = await AsyncStorage.multiGet(keys);

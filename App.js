@@ -58,6 +58,7 @@ async function loadResourcesAsync() {
 			require('./assets/icon.png'),
 			require('./assets/splash.png'),
 			require('./assets/logo.png'),
+			require('./assets/placeholder.jpg'),
 		]),
 	]);
 }

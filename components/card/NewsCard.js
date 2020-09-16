@@ -29,6 +29,7 @@ export default function NewsCard(props) {
 				props.navigation.navigate('Detail', {
 					id: data.id,
 					category: data.categories[0].title,
+					data: data,
 				});
 			}}
 		>

@@ -3,7 +3,6 @@ import { View, StyleSheet, ScrollView, Dimensions } from 'react-native';
 import { Tab, TabView } from '@ui-kitten/components';
 
 import TopNav from '../components/topnav/TopNav';
-import Latest from './rubrik/Latest';
 import Rubrik from './rubrik/Rubrik';
 
 const { width } = Dimensions.get('window');
@@ -22,15 +21,25 @@ export default function HomeScreen({ navigation }) {
 					<Tab title="Infogafis" />
 					<Tab title="Daerah" />
 				</TabView>
-				{selectedIndex == 0 && <Latest navigation={navigation} />}
+				{selectedIndex == 0 && (
+					<Rubrik rubrik="latest" navigation={navigation} />
+				)}
 				{selectedIndex == 1 && (
-					<Rubrik slug="rilis-media" navigation={navigation} />
+					<Rubrik
+						rubrik="category"
+						slug="rilis-media"
+						navigation={navigation}
+					/>
 				)}
-				{selectedIndex == 2 && <Rubrik slug="blog" navigation={navigation} />}
+				{selectedIndex == 2 && (
+					<Rubrik rubrik="category" slug="blog" navigation={navigation} />
+				)}
 				{selectedIndex == 3 && (
-					<Rubrik slug="infografis" navigation={navigation} />
+					<Rubrik rubrik="category" slug="infografis" navigation={navigation} />
 				)}
-				{selectedIndex == 4 && <Rubrik slug="daerah" navigation={navigation} />}
+				{selectedIndex == 4 && (
+					<Rubrik rubrik="category" slug="daerah" navigation={navigation} />
+				)}
 			</ScrollView>
 		</View>
 	);

@@ -8,41 +8,17 @@ import {
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { Icon } from '@ui-kitten/components';
-import { Query } from 'react-apollo';
-import gql from 'graphql-tag';
-import LoadingNews from '../components/DetailNewsLoading';
 import News from '../components/DetailNews';
 const { width } = Dimensions.get('window');
 
 export default function Detail({ navigation, route }) {
-	const { id, category } = route.params;
-	const [content, setContent] = useState(null);
+	const { id, category, data } = route.params;
+	const [content] = useState(data);
 	const [saved, setSaved] = useState(false);
 
 	useEffect(() => {
 		checkSaved();
 	}, []);
-	const detail = `
-        query  {
-			detail(id:${id}){
-				id,
-				title,
-				date,
-				categories{
-				  title
-				},
-				author {
-				  name
-				},
-				thumbnail_images{
-				  full{
-					url
-				  }
-				},
-				content
-			  }
-        }
-	  `;
 
 	async function checkSaved() {
 		try {
@@ -61,10 +37,7 @@ export default function Detail({ navigation, route }) {
 	async function save() {
 		if (content) {
 			try {
-				await AsyncStorage.setItem(
-					'saved:' + id,
-					JSON.stringify(content.detail)
-				);
+				await AsyncStorage.setItem('saved:' + id, JSON.stringify(content));
 				setSaved(true);
 			} catch (error) {
 				alert(error);
@@ -145,20 +118,7 @@ export default function Detail({ navigation, route }) {
 				</View>
 			</View>
 
-			<Query
-				query={gql`
-					${detail}
-				`}
-			>
-				{({ loading, error, data }) => {
-					if (loading || error) {
-						return <LoadingNews />;
-					} else if (data) {
-						setContent(data);
-						return <News data={data.detail} />;
-					}
-				}}
-			</Query>
+			<News data={data} />
 		</View>
 	);
 }

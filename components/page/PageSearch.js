@@ -1,18 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, StyleSheet, Dimensions } from 'react-native';
-import Slider from '../components/LoadingSlider';
-import NewsCard from '../components/LoadingNewsCard';
+import NewsCard from '../card/NewsCard';
 const { width } = Dimensions.get('window');
 export default function Page(props) {
+	const { news, isFetched } = props;
+	const [berita] = useState(news.search);
+
 	return (
 		<View style={{ flex: 1 }}>
-			<Slider isFetched={false} />
-
 			<View style={styles.newsCardContainer}>
-				<NewsCard isFetched={false} data={props.news} />
-				<NewsCard isFetched={false} data={props.news} />
-				<NewsCard isFetched={false} data={props.news} />
-				<NewsCard isFetched={false} data={props.news} />
+				{berita !== undefined &&
+					berita.map((item) => {
+						return (
+							<NewsCard
+								key={item.id}
+								isFetched={isFetched}
+								data={item}
+								navigation={props.navigation}
+							/>
+						);
+					})}
 			</View>
 		</View>
 	);

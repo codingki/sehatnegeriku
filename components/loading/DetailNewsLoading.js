@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
 	Text,
 	View,
@@ -6,28 +6,11 @@ import {
 	ScrollView,
 	Image,
 	Dimensions,
-	TouchableOpacity,
-	Easing,
 } from 'react-native';
-import HTML from 'react-native-render-html';
-import { Ionicons } from '@expo/vector-icons';
-import { Icon } from '@ui-kitten/components';
-import { ApolloProvider, Query, useQuery } from 'react-apollo';
-import gql from 'graphql-tag';
 import ShimmerPlaceHolder from 'react-native-shimmer-placeholder';
-const { width, height } = Dimensions.get('window');
-const category = 0.034 * width;
+const { width } = Dimensions.get('window');
 
-export default function Detail(props) {
-	const htmlContent = `
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-    Pellentesque arcu eget risus est in proin nec facilisis purus.
-    Mauris tristique blandit a morbi habitant sed consectetur blandit.
-    Sed scelerisque cras quam a imperdiet in erat in. Aenean dolor
-    libero mattis pharetra volutpat tincidunt aliquam est, malesuada.
-    Libero senectus lectus facilisis molestie. Porttitor felis sit
-    tempus nunc mauris orci, amet auctor in.</p>
-`;
+export default function Detail() {
 	return (
 		<ScrollView stickyHeaderIndices={[1]}>
 			<ShimmerPlaceHolder
@@ -61,7 +44,7 @@ export default function Detail(props) {
 				</ShimmerPlaceHolder>
 				<ShimmerPlaceHolder
 					visible={false}
-					style={{ width: '40%', marginTop: 10, height: 10 }}
+					style={{ width: '0%', marginTop: 10, height: 10 }}
 				>
 					<Text style={{ color: '#9A9696', marginTop: 2, fontSize: 12 }}>
 						John Doe | Loading
@@ -113,10 +96,3 @@ export default function Detail(props) {
 		</ScrollView>
 	);
 }
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: '#f5f5f5',
-	},
-});

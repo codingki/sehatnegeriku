@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Text, View, StyleSheet, Dimensions } from 'react-native';
-import NewsCard from '../components/NewsCard';
+import NewsCard from '../card/NewsCard';
 const { width, height } = Dimensions.get('window');
 export default function Page(props) {
 	const [] = useState(props.news);

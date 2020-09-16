@@ -3,7 +3,6 @@ import { View, StyleSheet, ScrollView, Dimensions } from 'react-native';
 import { Tab, TabView } from '@ui-kitten/components';
 
 import TopNav from '../components/topnav/TopNav';
-import Latest from './rubrik/Latest';
 import Rubrik from './rubrik/Rubrik';
 
 const { width } = Dimensions.get('window');
@@ -20,8 +19,12 @@ export default function MediaScreen({ navigation }) {
 					<Tab title="Video" />
 					<Tab title="Foto" />
 				</TabView>
-				{selectedIndex == 0 && <Rubrik slug="video" navigation={navigation} />}
-				{selectedIndex == 1 && <Rubrik slug="foto" navigation={navigation} />}
+				{selectedIndex == 0 && (
+					<Rubrik rubrik="category" slug="video" navigation={navigation} />
+				)}
+				{selectedIndex == 1 && (
+					<Rubrik rubrik="category" slug="foto" navigation={navigation} />
+				)}
 			</ScrollView>
 		</View>
 	);

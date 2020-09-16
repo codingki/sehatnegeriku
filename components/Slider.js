@@ -1,19 +1,9 @@
-import React, { useState } from 'react';
-import {
-	Text,
-	View,
-	StyleSheet,
-	ScrollView,
-	Image,
-	Dimensions,
-} from 'react-native';
-import { Icon } from '@ui-kitten/components';
-import { Ionicons } from '@expo/vector-icons';
-import { LinearGradient } from 'expo-linear-gradient';
+import React from 'react';
+import { View, Dimensions } from 'react-native';
 import Swiper from 'react-native-swiper';
 import ShimmerPlaceHolder from 'react-native-shimmer-placeholder';
-import SliderCard from './SliderCard';
-const { width, height } = Dimensions.get('window');
+import SliderCard from './card/SliderCard';
+const { width } = Dimensions.get('window');
 export default function Slider(props) {
 	const isFetched = props.isFetched;
 	const { data } = props;
