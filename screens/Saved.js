@@ -52,7 +52,6 @@ export default function SavedScreen({ navigation }) {
 			>
 				{/* Top Nav */}
 				<TopNav navigation={navigation} />
-
 				<Saved news={data} navigation={navigation} />
 			</ScrollView>
 		</View>

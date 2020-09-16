@@ -1,5 +1,11 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, ScrollView, Dimensions } from 'react-native';
+import React, { useState, useRef } from 'react';
+import {
+	View,
+	StyleSheet,
+	ScrollView,
+	Dimensions,
+	RefreshControl,
+} from 'react-native';
 import { Tab, TabView } from '@ui-kitten/components';
 
 import TopNav from '../components/topnav/TopNav';
@@ -8,10 +14,28 @@ import Rubrik from './rubrik/Rubrik';
 const { width } = Dimensions.get('window');
 
 export default function HomeScreen({ navigation }) {
+	const [refreshing, setRefreshing] = useState(false);
 	const [selectedIndex, setSelectedIndex] = useState(0);
+
+	const refresh = useRef();
+
+	function onRefresh() {
+		setRefreshing(true);
+		refresh.current.refresh();
+	}
+
 	return (
 		<View style={styles.container}>
-			<ScrollView stickyHeaderIndices={[1]}>
+			<ScrollView
+				stickyHeaderIndices={[1]}
+				refreshControl={
+					<RefreshControl
+						colors={['#16B3AC']}
+						refreshing={refreshing}
+						onRefresh={onRefresh}
+					/>
+				}
+			>
 				{/* Top Nav */}
 				<TopNav navigation={navigation} />
 				<TabView selectedIndex={selectedIndex} onSelect={setSelectedIndex}>
@@ -22,23 +46,53 @@ export default function HomeScreen({ navigation }) {
 					<Tab title="Daerah" />
 				</TabView>
 				{selectedIndex == 0 && (
-					<Rubrik rubrik="latest" navigation={navigation} />
+					<Rubrik
+						refreshing={refreshing}
+						setRefreshing={setRefreshing}
+						ref={refresh}
+						rubrik="latest"
+						navigation={navigation}
+					/>
 				)}
 				{selectedIndex == 1 && (
 					<Rubrik
+						refreshing={refreshing}
+						setRefreshing={setRefreshing}
+						ref={refresh}
 						rubrik="category"
 						slug="rilis-media"
 						navigation={navigation}
 					/>
 				)}
 				{selectedIndex == 2 && (
-					<Rubrik rubrik="category" slug="blog" navigation={navigation} />
+					<Rubrik
+						refreshing={refreshing}
+						setRefreshing={setRefreshing}
+						ref={refresh}
+						rubrik="category"
+						slug="blog"
+						navigation={navigation}
+					/>
 				)}
 				{selectedIndex == 3 && (
-					<Rubrik rubrik="category" slug="infografis" navigation={navigation} />
+					<Rubrik
+						refreshing={refreshing}
+						setRefreshing={setRefreshing}
+						ref={refresh}
+						rubrik="category"
+						slug="infografis"
+						navigation={navigation}
+					/>
 				)}
 				{selectedIndex == 4 && (
-					<Rubrik rubrik="category" slug="daerah" navigation={navigation} />
+					<Rubrik
+						refreshing={refreshing}
+						setRefreshing={setRefreshing}
+						ref={refresh}
+						rubrik="category"
+						slug="daerah"
+						navigation={navigation}
+					/>
 				)}
 			</ScrollView>
 		</View>

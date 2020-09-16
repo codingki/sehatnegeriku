@@ -1,5 +1,11 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, ScrollView, Dimensions } from 'react-native';
+import React, { useState, useRef } from 'react';
+import {
+	View,
+	StyleSheet,
+	ScrollView,
+	Dimensions,
+	RefreshControl,
+} from 'react-native';
 import { Tab, TabView } from '@ui-kitten/components';
 
 import TopNav from '../components/topnav/TopNav';
@@ -8,11 +14,26 @@ import Rubrik from './rubrik/Rubrik';
 const { width } = Dimensions.get('window');
 
 export default function MediaScreen({ navigation }) {
+	const [refreshing, setRefreshing] = useState(false);
 	const [selectedIndex, setSelectedIndex] = useState(0);
+	const refresh = useRef();
 
+	function onRefresh() {
+		setRefreshing(true);
+		refresh.current.refresh();
+	}
 	return (
 		<View style={styles.container}>
-			<ScrollView stickyHeaderIndices={[1]}>
+			<ScrollView
+				stickyHeaderIndices={[1]}
+				refreshControl={
+					<RefreshControl
+						colors={['#16B3AC']}
+						refreshing={refreshing}
+						onRefresh={onRefresh}
+					/>
+				}
+			>
 				{/* Top Nav */}
 				<TopNav navigation={navigation} />
 				<TabView selectedIndex={selectedIndex} onSelect={setSelectedIndex}>
@@ -20,10 +41,24 @@ export default function MediaScreen({ navigation }) {
 					<Tab title="Foto" />
 				</TabView>
 				{selectedIndex == 0 && (
-					<Rubrik rubrik="category" slug="video" navigation={navigation} />
+					<Rubrik
+						refreshing={refreshing}
+						setRefreshing={setRefreshing}
+						ref={refresh}
+						rubrik="category"
+						slug="video"
+						navigation={navigation}
+					/>
 				)}
 				{selectedIndex == 1 && (
-					<Rubrik rubrik="category" slug="foto" navigation={navigation} />
+					<Rubrik
+						refreshing={refreshing}
+						setRefreshing={setRefreshing}
+						ref={refresh}
+						rubrik="category"
+						slug="foto"
+						navigation={navigation}
+					/>
 				)}
 			</ScrollView>
 		</View>
