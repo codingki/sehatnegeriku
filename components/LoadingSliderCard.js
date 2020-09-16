@@ -10,7 +10,6 @@ import {
 
 import { LinearGradient } from 'expo-linear-gradient';
 
-const { width, height } = Dimensions.get('window');
 export default function SliderCard(props) {
 	const { data } = props;
 	function check() {

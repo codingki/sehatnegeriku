@@ -6,13 +6,9 @@ import {
 	Dimensions,
 	RefreshControl,
 } from 'react-native';
-import { Tab, TabView } from '@ui-kitten/components';
 import AsyncStorage from '@react-native-community/async-storage';
-import TopNav from '../components/SavedTopNav';
-import Latest from './rubrik/Latest';
+import TopNav from '../components/topnav/SavedTopNav';
 import Saved from '../components/PageSaved';
-
-const { width } = Dimensions.get('window');
 
 export default function SavedScreen({ navigation }) {
 	const [data, setData] = useState(null);

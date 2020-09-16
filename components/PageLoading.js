@@ -1,25 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import {
-	Text,
-	View,
-	StyleSheet,
-	ScrollView,
-	Image,
-	Dimensions,
-	Animated,
-	Easing,
-} from 'react-native';
-import { Layout, Tab, TabView } from '@ui-kitten/components';
-var _ = require('lodash');
-import TopNav from '../components/TopNav';
+import React from 'react';
+import { View, StyleSheet, Dimensions } from 'react-native';
 import Slider from '../components/LoadingSlider';
 import NewsCard from '../components/LoadingNewsCard';
-import CategoryBar from '../components/CategoryBar';
-const { width, height } = Dimensions.get('window');
-const category = 0.034 * width;
+const { width } = Dimensions.get('window');
 export default function Page(props) {
-	const { isFetched } = props;
-
 	return (
 		<View style={{ flex: 1 }}>
 			<Slider isFetched={false} />

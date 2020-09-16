@@ -1,31 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import {
-	Text,
-	View,
-	StyleSheet,
-	ScrollView,
-	Image,
-	Dimensions,
-	Animated,
-	Easing,
-} from 'react-native';
-import { Layout, Tab, TabView } from '@ui-kitten/components';
-var _ = require('lodash');
-import TopNav from '../components/TopNav';
-import Slider from '../components/Slider';
+import React, { useState } from 'react';
+import { Text, View, StyleSheet, Dimensions } from 'react-native';
 import NewsCard from '../components/NewsCard';
-import CategoryBar from '../components/CategoryBar';
 const { width, height } = Dimensions.get('window');
-const category = 0.034 * width;
 export default function Page(props) {
-	const [berita, setBerita] = useState(props.news);
+	const [] = useState(props.news);
 	return (
 		<View style={{ flex: 1 }}>
 			{props.news !== null ? (
 				<View style={styles.newsCardContainer}>
 					{props.news.map((result, i, store) => {
 						// get at each store's key/value so you can work with it
-						let key = store[i][0];
 						let item = store[i][1];
 						const pars = JSON.parse(item);
 						console.log(pars);

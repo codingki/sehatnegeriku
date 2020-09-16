@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {
 	Text,
 	View,
@@ -6,19 +6,11 @@ import {
 	ScrollView,
 	Image,
 	Dimensions,
-	TouchableOpacity,
-	Easing,
-	AsyncStorage,
 } from 'react-native';
 import HTML from 'react-native-render-html';
-import { Ionicons } from '@expo/vector-icons';
-import { Icon } from '@ui-kitten/components';
-import { ApolloProvider, Query, useQuery } from 'react-apollo';
-import gql from 'graphql-tag';
 import moment from 'moment';
 
-const { width, height } = Dimensions.get('window');
-const category = 0.034 * width;
+const { width } = Dimensions.get('window');
 
 export default function Detail(props) {
 	const { data } = props;
@@ -84,10 +76,3 @@ export default function Detail(props) {
 		</ScrollView>
 	);
 }
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: '#f5f5f5',
-	},
-});

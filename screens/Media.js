@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { View, StyleSheet, ScrollView, Dimensions } from 'react-native';
 import { Tab, TabView } from '@ui-kitten/components';
 
-import TopNav from '../components/TopNav';
+import TopNav from '../components/topnav/TopNav';
 import Latest from './rubrik/Latest';
 import Rubrik from './rubrik/Rubrik';
 

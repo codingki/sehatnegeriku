@@ -1,17 +1,9 @@
-import React, { useState } from 'react';
-import {
-	Text,
-	View,
-	StyleSheet,
-	ScrollView,
-	Image,
-	Dimensions,
-} from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import React from 'react';
+import { Text, View, StyleSheet, Dimensions } from 'react-native';
 
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 const category = 0.034 * width;
-export default function TopNav(props) {
+export default function TopNav() {
 	return (
 		<View
 			style={{
@@ -71,10 +63,3 @@ export default function TopNav(props) {
 		</View>
 	);
 }
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: '#f5f5f5',
-	},
-});

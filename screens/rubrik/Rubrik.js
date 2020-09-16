@@ -15,7 +15,7 @@ import { ApolloProvider, Query, useQuery } from 'react-apollo';
 import ApolloClient from 'apollo-boost';
 import gql from 'graphql-tag';
 
-import PageLoading from '../../components/PageLoading';
+import PageLoading from '../../components/loading/Page';
 import Page from '../../components/PageRubrik';
 const { width, height } = Dimensions.get('window');
 const category = 0.034 * width;

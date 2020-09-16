@@ -1,12 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, StyleSheet, ScrollView, Dimensions } from 'react-native';
-import { Tab, TabView } from '@ui-kitten/components';
 
-import TopNav from '../components/SearchTopNav';
+import TopNav from '../components/topnav/SearchTopNav';
 import Search from './rubrik/Search';
-import Rubrik from './rubrik/Rubrik';
-
-const { width } = Dimensions.get('window');
 
 export default function SearchScreen({ navigation, route }) {
 	const { search } = route.params;

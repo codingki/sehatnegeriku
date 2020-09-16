@@ -1,27 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import {
-	Text,
-	View,
-	StyleSheet,
-	ScrollView,
-	Image,
-	Dimensions,
-	Animated,
-	Easing,
-	ActivityIndicator,
-} from 'react-native';
-import { Layout, Tab, TabView } from '@ui-kitten/components';
-import { ApolloProvider, Query, useQuery } from 'react-apollo';
-import ApolloClient from 'apollo-boost';
+import React, { useState } from 'react';
+import { StyleSheet, Dimensions } from 'react-native';
+import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 
 import PageLoading from '../../components/PageLoading';
 import Page from '../../components/Page';
-const { width, height } = Dimensions.get('window');
-const category = 0.034 * width;
+const { width } = Dimensions.get('window');
 
 export default function HomeScreen(props) {
-	const [isFetched, setIsFetched] = useState(false);
+	const [, setIsFetched] = useState(false);
 
 	function recentQuery(page) {
 		return `
@@ -66,21 +53,3 @@ export default function HomeScreen(props) {
 		</Query>
 	);
 }
-
-const styles = StyleSheet.create({
-	container: {
-		flex: 1,
-		backgroundColor: '#f5f5f5',
-	},
-	newsCardContainer: {
-		backgroundColor: 'white',
-		borderColor: '#e5e5e5',
-		borderTopWidth: 1,
-		flex: 1,
-		paddingHorizontal: 15,
-		paddingVertical: 7.5,
-	},
-	tabContainer: {
-		minHeight: 64,
-	},
-});

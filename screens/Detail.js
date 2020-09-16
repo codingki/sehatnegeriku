@@ -3,22 +3,16 @@ import {
 	Text,
 	View,
 	StyleSheet,
-	ScrollView,
-	Image,
 	Dimensions,
 	TouchableOpacity,
-	Easing,
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-import HTML from 'react-native-render-html';
-import { Ionicons } from '@expo/vector-icons';
 import { Icon } from '@ui-kitten/components';
-import { ApolloProvider, Query, useQuery } from 'react-apollo';
+import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import LoadingNews from '../components/DetailNewsLoading';
 import News from '../components/DetailNews';
-const { width, height } = Dimensions.get('window');
-const category = 0.034 * width;
+const { width } = Dimensions.get('window');
 
 export default function Detail({ navigation, route }) {
 	const { id, category } = route.params;

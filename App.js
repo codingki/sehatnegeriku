@@ -13,6 +13,7 @@ import { ApolloProvider, Query } from 'react-apollo';
 import ApolloClient from 'apollo-boost';
 import moment from 'moment';
 import 'moment/locale/id';
+
 const client = new ApolloClient({
 	uri: 'https://obscure-ridge-07773.herokuapp.com/graphql',
 });
