@@ -1,16 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
 	Text,
 	View,
-	StyleSheet,
-	ScrollView,
 	Image,
 	Dimensions,
 	TouchableWithoutFeedback,
 } from 'react-native';
 import ShimmerPlaceHolder from 'react-native-shimmer-placeholder';
 import moment from 'moment';
-const { width, height } = Dimensions.get('window');
+import { SharedElement } from 'react-navigation-shared-element';
+
 export default function NewsCard(props) {
 	const { isFetched, data } = props;
 	function check() {
@@ -26,7 +25,7 @@ export default function NewsCard(props) {
 	return (
 		<TouchableWithoutFeedback
 			onPress={() => {
-				props.navigation.navigate('Detail', {
+				props.navigation.push('Detail', {
 					id: data.id,
 					category: data.categories[0].title,
 					data: data,
@@ -47,13 +46,15 @@ export default function NewsCard(props) {
 					visible={isFetched}
 				>
 					{check() && (
-						<Image
-							style={{ height: 110, width: 110, borderRadius: 10 }}
-							resizeMode="cover"
-							source={{
-								uri: data.thumbnail_images.full.url,
-							}}
-						/>
+						<SharedElement id={`data.${data.id}`}>
+							<Image
+								style={{ height: 110, width: 110, borderRadius: 10 }}
+								resizeMode="cover"
+								source={{
+									uri: data.thumbnail_images.full.url,
+								}}
+							/>
+						</SharedElement>
 					)}
 				</ShimmerPlaceHolder>
 				<View

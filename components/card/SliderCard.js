@@ -8,9 +8,10 @@ import {
 	Dimensions,
 	TouchableWithoutFeedback,
 } from 'react-native';
-
 import { LinearGradient } from 'expo-linear-gradient';
 import moment from 'moment';
+
+import { SharedElement } from 'react-navigation-shared-element';
 const { width, height } = Dimensions.get('window');
 export default function SliderCard(props) {
 	const { data } = props;
@@ -41,15 +42,17 @@ export default function SliderCard(props) {
 					marginHorizontal: 15,
 				}}
 			>
-				<Image
-					style={{ height: 230, borderRadius: 10 }}
-					resizeMode="cover"
-					source={{
-						uri: check()
-							? data.thumbnail_images.full.url
-							: 'https://www.brownweinraub.com/wp-content/uploads/2017/09/placeholder.jpg',
-					}}
-				/>
+				<SharedElement id={`data.${data.id}`}>
+					<Image
+						style={{ height: 230, borderRadius: 10 }}
+						resizeMode="cover"
+						source={{
+							uri: check()
+								? data.thumbnail_images.full.url
+								: 'https://www.brownweinraub.com/wp-content/uploads/2017/09/placeholder.jpg',
+						}}
+					/>
+				</SharedElement>
 
 				<LinearGradient
 					colors={['transparent', 'rgba(0,0,0,0.7)']}
@@ -76,6 +79,7 @@ export default function SliderCard(props) {
 							fontWeight: 'bold',
 							color: '#fff',
 						}}
+						numberOfLines={3}
 					>
 						{data.title}
 					</Text>

@@ -9,10 +9,10 @@ import {
 } from 'react-native';
 import HTML from 'react-native-render-html';
 import moment from 'moment';
-
+import { SharedElement } from 'react-navigation-shared-element';
 const { width } = Dimensions.get('window');
 
-export default function Detail(props) {
+function Detail(props) {
 	const { data } = props;
 	function check() {
 		if (data.thumbnail_images) {
@@ -27,13 +27,15 @@ export default function Detail(props) {
 	return (
 		<ScrollView stickyHeaderIndices={[1]}>
 			{check() ? (
-				<Image
-					style={{ height: 230 }}
-					resizeMode="cover"
-					source={{
-						uri: data.thumbnail_images.full.url,
-					}}
-				/>
+				<SharedElement id={`data.${data.id}`}>
+					<Image
+						style={{ height: 230 }}
+						resizeMode="cover"
+						source={{
+							uri: data.thumbnail_images.full.url,
+						}}
+					/>
+				</SharedElement>
 			) : (
 				<View />
 			)}
@@ -76,3 +78,12 @@ export default function Detail(props) {
 		</ScrollView>
 	);
 }
+Detail.sharedElements = (props) => {
+	const { data } = props;
+	return [
+		{
+			id: `data.${data.id}`,
+		},
+	];
+};
+export default Detail;

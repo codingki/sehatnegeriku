@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { createStackNavigator } from '@react-navigation/stack';
-import TabBarIcon from '../components/TabBarIcon';
+import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
 
+import TabBarIcon from '../components/TabBarIcon';
 import Home from '../screens/Home';
 import Detail from '../screens/Detail';
 import Media from '../screens/Media';
@@ -13,7 +13,7 @@ import Saved from '../screens/Saved';
 
 const Tab = createBottomTabNavigator();
 
-const Stack = createStackNavigator();
+const Stack = createSharedElementStackNavigator();
 
 const Tabs = () => {
 	return (
@@ -41,6 +41,10 @@ const Tabs = () => {
 					tabBarIcon: ({ focused }) => (
 						<TabBarIcon focused={focused} name={'home'} />
 					),
+				}}
+				sharedElementsConfig={(route, otherRoute, showing) => {
+					const { data } = route.params;
+					return [`data.${data.id}`];
 				}}
 			/>
 			<Tab.Screen
@@ -99,7 +103,24 @@ const Stacks = () => {
 		>
 			<Stack.Screen name="Main" component={Tabs} />
 			<Stack.Screen name="Search" component={Search} />
-			<Stack.Screen name="Detail" component={Detail} />
+			<Stack.Screen
+				name="Detail"
+				component={Detail}
+				options={() => ({
+					gestureEnabled: false,
+					transitionSpec: {
+						open: { animation: 'timing', config: { duration: 500 } },
+						close: { animation: 'timing', config: { duration: 250 } },
+					},
+					cardStyleInterpolator: ({ current: { progress } }) => {
+						return {
+							cardStyle: {
+								opacity: progress,
+							},
+						};
+					},
+				})}
+			/>
 		</Stack.Navigator>
 	);
 };

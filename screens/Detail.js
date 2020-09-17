@@ -5,13 +5,18 @@ import {
 	StyleSheet,
 	Dimensions,
 	TouchableOpacity,
+	ScrollView,
+	Image,
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 import { Icon } from '@ui-kitten/components';
 import News from '../components/DetailNews';
+import HTML from 'react-native-render-html';
+import moment from 'moment';
+import { SharedElement } from 'react-navigation-shared-element';
 const { width } = Dimensions.get('window');
 
-export default function Detail({ navigation, route }) {
+function Detail({ navigation, route }) {
 	const { id, category, data } = route.params;
 	const [content] = useState(data);
 	const [saved, setSaved] = useState(false);
@@ -55,7 +60,15 @@ export default function Detail({ navigation, route }) {
 			}
 		}
 	}
-
+	function check() {
+		if (data.thumbnail_images) {
+			if (data.thumbnail_images.full) {
+				if (data.thumbnail_images.full.url) {
+					return true;
+				}
+			}
+		}
+	}
 	return (
 		<View style={styles.container}>
 			<View
@@ -118,7 +131,57 @@ export default function Detail({ navigation, route }) {
 				</View>
 			</View>
 
-			<News data={data} />
+			<ScrollView stickyHeaderIndices={[1]}>
+				{check() ? (
+					<SharedElement id={`data.${data.id}`}>
+						<Image
+							style={{ height: 230 }}
+							resizeMode="cover"
+							source={{
+								uri: data.thumbnail_images.full.url,
+							}}
+						/>
+					</SharedElement>
+				) : (
+					<View />
+				)}
+
+				<View
+					style={{
+						padding: 8,
+						paddingHorizontal: 15,
+						backgroundColor: 'white',
+						borderBottomWidth: 1,
+						borderColor: '#e7e7e7',
+						marginBottom: 8,
+					}}
+				>
+					<Text style={{ fontWeight: 'bold', fontSize: 18 }}>{data.title}</Text>
+					<Text style={{ color: '#9A9696', marginTop: 2, fontSize: 12 }}>
+						{data.author.name} |{' '}
+						{moment(data.date).format('dddd, Do MMMM YYYY HH mm')}
+					</Text>
+				</View>
+				<View
+					style={{
+						backgroundColor: 'white',
+						borderTopWidth: 1,
+						borderColor: '#e7e7e7',
+						paddingHorizontal: 15,
+						paddingVertical: 8,
+					}}
+				>
+					<HTML
+						html={data.content}
+						imagesMaxWidth={width - 30}
+						textSelectable
+						tagsStyles={{
+							p: { fontSize: 16, marginBottom: 24, lineHeight: 24 },
+							img: { width: '100%' },
+						}}
+					/>
+				</View>
+			</ScrollView>
 		</View>
 	);
 }
@@ -129,3 +192,14 @@ const styles = StyleSheet.create({
 		backgroundColor: '#f5f5f5',
 	},
 });
+
+Detail.sharedElements = (route) => {
+	const { data } = route.params;
+	return [
+		{
+			id: `data.${data.id}`,
+		},
+	];
+};
+
+export default Detail;
