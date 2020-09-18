@@ -12,16 +12,24 @@ This is unofficial Redesign & Rebuild project by me.
 - React navigation
 - UI Kitten
 
-## To do:
+## To do :
 
-- [ ]  Delete some unused files
-- [ ]  Refactoring some components
-- [ ]  Implementing infinite scroll
-- [ ]  In detail page (single page) article no need to request data
-- [ ]  Implementing shared element for navigation transitions
+- [x]  Delete some unused files
+- [x]  Refactoring some components
+- [x]  Implementing infinite scroll
+- [x]  In detail page (single page) article no need to request data
+- [x]  Implementing shared element for navigation transitions
 - [ ]  Upload to playstore 🥳
 
-Graphql server repo : [https://github.com/codingki/sehatnegeriku-graphql](https://github.com/codingki/sehatnegeriku-graphql)
+## Update :
+
+- Shared element transitions
+
+    ![preview.gif](preview.gif)
+
+- Better reading experience
+
+    ![ss.png](ss.png)
 
 Full read case study : [https://twitter.com/kikiding/status/1302211106958573568](https://twitter.com/kikiding/status/1302211106958573568)
 
