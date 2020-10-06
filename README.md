@@ -19,7 +19,7 @@ This is unofficial Redesign & Rebuild project by me.
 - [x]  Implementing infinite scroll
 - [x]  In detail page (single page) article no need to request data
 - [x]  Implementing shared element for navigation transitions
-- [ ]  Upload to playstore 🥳
+- [x]  Upload to playstore 🥳
 
 ## Update :
 
@@ -34,3 +34,5 @@ This is unofficial Redesign & Rebuild project by me.
 Full read case study : [https://twitter.com/kikiding/status/1302211106958573568](https://twitter.com/kikiding/status/1302211106958573568)
 
 Try it on expo : [https://expo.io/@kidingki/sehatnegeriku](https://expo.io/@kidingki/sehatnegeriku)
+
+Download on Playstore : [https://play.google.com/store/apps/details?id=com.pmapps.sehatnegeriku](https://play.google.com/store/apps/details?id=com.pmapps.sehatnegeriku)
