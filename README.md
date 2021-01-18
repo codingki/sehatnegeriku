@@ -35,4 +35,4 @@ Full read case study : [https://twitter.com/kikiding/status/1302211106958573568]
 
 Try it on expo : [https://expo.io/@kidingki/sehatnegeriku](https://expo.io/@kidingki/sehatnegeriku)
 
-Download on Playstore : [https://play.google.com/store/apps/details?id=com.pmapps.sehatnegeriku](https://play.google.com/store/apps/details?id=com.pmapps.sehatnegeriku)
+Download on Playstore : [https://play.google.com/store/apps/details?id=com.kikiding.sehatnegerikurebuild](https://play.google.com/store/apps/details?id=com.kikiding.sehatnegerikurebuild)
